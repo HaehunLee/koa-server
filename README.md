@@ -47,3 +47,11 @@
     $ npm install koa-router
     $ yarn add koa-router
     ```
+
+- koa-bodyparser
+    - POST/PUT/PATCH 메서드의 Request Body에 JSON형식 데이터를
+     넣을 때, 파싱하여 서버에서 사용할 수 있게 해주는 미들 웨어
+    ```js
+    $ npm install koa-bodyparser
+    $ yarn add koa-bodyparser
+    ```

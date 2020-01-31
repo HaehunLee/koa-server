@@ -2,9 +2,23 @@
 const Koa = require('koa');
 // koa-router
 const Router = require('koa-router');
+// body parser
+const bodyParser = require('koa-bodyparser');
+
+// api router 등록
+const api = require('./api');
 
 const app = new Koa();
 const router = new Router();
+
+// api 라우터 설정
+router.use('/api', api.routes());
+
+// 라우터 적용전 bodyParser적용
+app.use(bodyParser());
+
+// app 인스턴스에 라우터 적용
+app.use(router.routes()).use(router.allowedMethods());
 
 // 라우터 설정
 router.get('/', ctx => {
@@ -22,9 +36,6 @@ router.get('/posts', ctx => {
     // id의 존재 유무에 따라 다른 결과 출력
     ctx.body = id? `포스트 #${id}` : '포스트 아이디가 없습니다.';
 })
-
-// app 인스턴스에 라우터 적용
-app.use(router.routes()).use(router.allowedMethods());
 
 app.use(async (ctx, next) => {
     console.log(ctx.url);
